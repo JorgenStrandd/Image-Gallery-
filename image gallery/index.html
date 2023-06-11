@@ -1,0 +1,190 @@
+<div class="gallery">
+  <h1 class="gallery-title">Jørgen Image Gallery</h1>
+  <div class="categories">
+    <button class="category-btn active" data-category="all">All</button>
+    <button class="category-btn" data-category="jørgen">Jørgen</button>
+    <button class="category-btn" data-category="mats">Mats</button>
+    <button class="category-btn" data-category="andre">Andre</button>
+  </div>
+  <div class="images">
+    <div class="image jørgen">
+      <img src="/img/jørgen/WIN_20230414_09_39_59_Pro.jpg" alt="jørgen 1">
+    </div>
+    <div class="image mats">
+      <img src="/img/mats/IMG_6443.JPG" alt="mats 1">
+    </div>
+    <div class="image andre">
+      <img src="/img/andre/IMG_6468.JPG" alt="andre 1">
+    </div>
+    <div class="image jørgen">
+      <img src="/img/jørgen/WIN_20230421_08_54_41_Pro.jpg" alt="jørgen 2">
+    </div>
+    <div class="image mats">
+      <img src="/img/mats/IMG_6464.JPG" alt="mats 2">
+    </div>
+    <div class="image andre">
+      <img src="/img/andre/IMG_6491.JPG" alt="andre 3">
+    </div>
+    <div class="image jørgen">
+      <img src="/img/jørgen/WIN_20230421_11_21_37_Pro.jpg" alt="jørgen 3">
+    </div>
+    <div class="image mats">
+      <img src="/img/mats/IMG_6466.JPG" alt="mats 3">
+    </div>
+    <div class="image andre">
+      <img src="/img/andre/IMG_6495.JPG" alt="andre 3">
+    </div>
+    <div class="image jørgen">
+      <img src="/img/jørgen/WIN_20230508_11_02_23_Pro.jpg" alt="jørgen 4">
+    </div>
+    <div class="image mats">
+      <img src="/img/mats/IMG_6467.JPG" alt="mats 4">
+    </div>
+    <div class="image andre">
+      <img src="/img/andre/IMG_6507.JPG" alt="andre 4">
+    </div>
+    <div class="image jørgen">
+      <img src="/img/jørgen/WIN_20230509_12_15_17_Pro.jpg" alt="jørgen 5">
+    </div>
+    <div class="image mats">
+      <img src="/img/mats/IMG_6499.JPG" alt="mats 5">
+    </div>
+    <div class="image andre">
+      <img src="/img/andre/IMG_6508.JPG" alt="andre 5">
+    </div>
+    <div class="image jørgen">
+      <img src="/img/jørgen/WIN_20230608_14_40_54_Pro.jpg" alt="jørgen 6">
+    </div>
+    <div class="image mats">
+      <img src="/img/mats/IMG_6506.JPG" alt="mats 6">
+    </div>
+    <div class="image andre">
+      <img src="/img/andre/IMG_6512.JPG" alt="andre 6">
+    </div>
+    <!-- Add more image divs here -->
+  </div>
+</div>
+
+</div>
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-image" src="" alt="">
+</div>
+<style>
+  body {
+    background-color: #101010;
+  }
+
+  .gallery-title {
+    font-size: 54px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+
+  .gallery {
+    text-align: center;
+  }
+
+  .categories {
+    margin-bottom: 20px;
+  }
+
+  .categories button {
+    margin: 5px;
+    padding: 10px 15px;
+    background: #ccc;
+    border: none;
+    cursor: pointer;
+  }
+
+  .categories button.active {
+    background: #555;
+    color: #fff;
+  }
+
+  .images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .image {
+    margin: 10px;
+    cursor: pointer;
+    width: 300px;
+    height: 300px;
+  }
+
+  .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .lightbox-image {
+    max-width: 80%;
+    max-height: 80%;
+    margin: 20px auto;
+    display: block;
+  }
+
+  .close {
+    color: #fff;
+    font-size: 30px;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    cursor: pointer;
+  }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const categoryBtns = document.querySelectorAll(".category-btn");
+    const images = document.querySelectorAll(".image");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.querySelector(".lightbox-image");
+    const closeBtn = document.querySelector(".close");
+
+    categoryBtns.forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        categoryBtns.forEach(function(btn) {
+          btn.classList.remove("active");
+        });
+        this.classList.add("active");
+        const category = this.getAttribute("data-category");
+
+        images.forEach(function(image) {
+          if (category === "all" || image.classList.contains(category)) {
+            image.style.display = "block";
+          } else {
+            image.style.display = "none";
+          }
+        });
+      });
+    });
+
+    images.forEach(function(image) {
+      image.addEventListener("click", function() {
+        const imgSrc = this.querySelector("img").getAttribute("src");
+        lightboxImage.setAttribute("src", imgSrc);
+        lightbox.style.display = "flex";
+      });
+    });
+
+    closeBtn.addEventListener("click", function() {
+      lightbox.style.display = "none";
+    });
+  });
+</script>
